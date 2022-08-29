@@ -1,0 +1,65 @@
+{% extends "patient_page/patient.html" %}
+{% block content %}
+
+<section class="home-section">
+    <div class="content-list" align="center">
+        <h3>Grafic al parametrilor  de sănătate</h3>
+        <br><br>    
+        <canvas id="myChart" style="width:700px;max-width:700px;height: 200px;" align="center"></canvas>
+  </div>
+  
+</section>
+
+<script >
+
+      var patient = JSON.parse('{{ data_patient | tojson | safe}}');
+
+      console.log(patient)
+    
+      patient.sort((a, b) => a.data.localeCompare(b.data));
+    
+      var xValues=[];
+      for(var i=0;i<patient.length;i++)
+        xValues.push(patient[i].data);
+      
+      var Pulse=[];
+      for(var i=0;i<patient.length;i++)
+        Pulse.push(patient[i].puls);
+    
+      var SPO2=[];
+      for(var i=0;i<patient.length;i++)
+        SPO2.push(patient[i].spo2);
+    
+      var TEMP=[];
+      for(var i=0;i<patient.length;i++)
+        TEMP.push(patient[i].temp);
+    
+      new Chart("myChart", {
+        type: "line",
+        data: {
+          labels: xValues,
+          datasets: [{
+            data: Pulse,
+            label: "Puls",
+            borderColor: "red",
+            fill: false
+          },{
+            data: SPO2,
+            label: "Saturatia oxigenului",
+            borderColor: "green",
+            fill: false
+          },{
+            data: TEMP,
+            label: "Temperatura",
+            borderColor: "blue",
+            fill: false
+          }]
+        },
+        options: {
+          legend: {display: true}
+        }
+      });
+
+    </script> 
+
+{% endblock %}

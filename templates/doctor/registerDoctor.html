@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Înregistrare</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/registerPage.css') }}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <div class="form">
+        <div class="form-center">
+            <div class="form-left">
+                <img src="{{ url_for('static', filename='imagini/conectare-img.svg') }}" class="image">
+            </div>
+            <div class="form-right">
+                <div class="form-content">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <ul class=flashes>
+                            {% for category, message in messages %}
+                            <script type="text/javascript">
+                                swal({
+                                title: "{{message}}",
+                                icon: "{{category}}",
+                                });
+                            </script>
+                        {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                    <form action="/register" method="post">
+                        <h3>Înregistreaza-te</h3>
+                        
+                        <input type="text" id="nume" name="nume" required placeholder="Nume si prenume">
+                        <input type="email" id="email" name="email" required placeholder="Email">
+                        <input type="password" id="password" name="password" required placeholder="Parola">
+                        <input type="password" id="Cpassword" name="Cpassword" required placeholder="Confirmare parola">
+                        <select name="gender" id="gender">
+                            <option value="">Gen</option>
+                            <option value="Masculin">Masculin</option>
+                            <option value="Feminin">Feminin</option>
+                        </select>
+                        <input type="text" class="input" id="phone" name="phone" required placeholder="Număr telefon">
+                        <input type="text" class="input" id="code" name="code" required placeholder="Cod">
+                        <br>
+                        <input type="submit" name="trimite" value="Trimite" class="form-button">
+                        <p> Aveţi deja un cont? <br> <a href="/connectDoctor">Conectare</a></p>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends "patient_page/patient.html" %}
+{% block content %}
+<section class="home-section">
+  <div class="content">
+    <div class="content-1">
+      <img src="{{ url_for('static', filename='imagini/startDataimg.svg') }}" class="img">
+      <br><br>
+      <h3>Bine ai venit, <span>{{nume}}</span></h3>
+      <br>
+      <h4>Pentru a monitoriza parametrii de sănătate, porniți dispozitivul și țineți degetul pe senzor timp de 30 de secunde după ce ați apăsat butonul de mai jos. </h4>
+      <br>
+      <form action="/Start_Data" method="post" >
+        <a href="/Start_Data" class="button2">START SENZORI</a>
+      </form>
+    </div>
+  </div>
+</section>        
+{% endblock %}

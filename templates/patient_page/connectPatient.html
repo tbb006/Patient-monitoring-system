@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectare</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/connectPage.css') }}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+
+<div class="form">
+    <div class="form-center">
+        <div class="form-left">
+            <img src="{{ url_for('static', filename='imagini/inregistrare-img.svg') }}" class="image">
+        </div>
+        <div class="form-right">
+            <div class="form-content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul class=flashes>
+                        {% for category, message in messages %}
+                        <script type="text/javascript">
+                            swal({
+                            title: "{{message}}",
+                            icon: "{{category}}",
+                            });
+                        </script>
+                    {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <form action="/connect_Patient" method="post">
+                    <h3>Conectează-te</h3>
+                    <input type="email" name="email" required placeholder="Email">
+                    <input type="password" name="parola" required placeholder="Parola">
+                    <input type="submit" name="trimite" value="Trimite" class="form-button">
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

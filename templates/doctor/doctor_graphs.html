@@ -1,0 +1,113 @@
+{% extends "doctor/doctor.html" %}
+{% block content %}
+
+<section class="home-section">
+    <div class="content-list" align="center">
+        <h3>Graficele parametrilor de sănătate</h3>
+        <br><br>
+        <form action="\doctor\graphs" method="get">
+          <select name="selectedvalue" class="select" value="Alege un pacient">
+            <option value="">Alege un pacient</option>
+            {% for o in name_json %}
+              <option value="{{ o.Nume }}">{{ o.Nume }}</option>
+            {% endfor %}
+          </select>
+          <br>
+          <button type="submit" class="button-select">Selectare</button>
+        </form>
+        <br>
+        <h3> Pacient - <span>{{ selectedvalue }}</span></h3>
+        <br>
+    <canvas id="Chart" style="width:700px;max-width:700px;height: 200px;" align="center"></canvas>    
+  </div>
+  
+</section>
+
+<script >
+
+  var user = JSON.parse('{{ data_json | tojson | safe}}');
+
+  user.sort((a, b) => a.data.localeCompare(b.data));
+
+  var xValues=[];
+  for(var i=0;i<user.length;i++)
+    xValues.push(user[i].data);
+  
+  var Pulse=[];
+  for(var i=0;i<user.length;i++)
+    Pulse.push(user[i].puls);
+
+  var SPO2=[];
+  for(var i=0;i<user.length;i++)
+    SPO2.push(user[i].spo2);
+
+  var TEMP=[];
+  for(var i=0;i<user.length;i++)
+    TEMP.push(user[i].temp);
+
+  new Chart("Chart", {
+    type: "line",
+    data: {
+      labels: xValues,
+      datasets: [{
+        data: Pulse,
+        label: "Puls",
+        borderColor: "red",
+        fill: false
+      },{
+        data: SPO2,
+        label: "Saturatia oxigenului",
+        borderColor: "green",
+        fill: false
+      },{
+        data: TEMP,
+        label: "Temperatura",
+        borderColor: "blue",
+        fill: false
+      }]
+    },
+    options: {
+      legend: {display: true}
+    }
+  });
+</script> 
+
+<script>
+  $(".custom-select").each(function() {
+  var classes = $(this).attr("class"),
+      id      = $(this).attr("id"),
+      name    = $(this).attr("name");
+  var template =  '<div class="' + classes + '">';
+      template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
+      template += '<div class="custom-options">';
+      $(this).find("option").each(function() {
+        template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+      });
+  template += '</div></div>';
+  
+  $(this).wrap('<div class="custom-select-wrapper"></div>');
+  $(this).hide();
+  $(this).after(template);
+});
+$(".custom-option:first-of-type").hover(function() {
+  $(this).parents(".custom-options").addClass("option-hover");
+}, function() {
+  $(this).parents(".custom-options").removeClass("option-hover");
+});
+$(".custom-select-trigger").on("click", function() {
+  $('html').one('click',function() {
+    $(".custom-select").removeClass("opened");
+  });
+  $(this).parents(".custom-select").toggleClass("opened");
+  event.stopPropagation();
+});
+$(".custom-option").on("click", function() {
+  $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
+  $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+  $(this).addClass("selection");
+  $(this).parents(".custom-select").removeClass("opened");
+  $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
+});
+</script>
+
+{% endblock %}

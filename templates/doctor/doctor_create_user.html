@@ -1,0 +1,77 @@
+{% extends "doctor/doctor.html" %}
+{% block content %}
+
+<section class="home-section">
+    <div class="content-createPatient" align="center">        
+        <div class="addPatient">
+            <div class="title">
+            Adaugă pacienți
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                        {% for category, message in messages %}
+                            <script type="text/javascript">
+                                swal({
+                                    title: "{{message}}",
+                                    icon: "{{category}}",
+                                });
+                            </script>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <form action="/doctor/create_user/register_user" method="post">
+                <div class="form">
+                    <div class="inputfield">
+                        <label>Nume și prenume</label>
+                        <input type="text" class="input" id="userName" name="userName" >
+                    </div>   
+                    <div class="inputfield">
+                        <label>Email</label>
+                        <input type="email" class="input" id="email" name="email" >
+                    </div> 
+                    <div class="inputfield">
+                        <label>Parola</label>
+                        <input type="password" class="input" id="password" name="password" >
+                    </div>  
+                    <div class="inputfield">
+                    <label>Gen</label>
+                        <div class="custom_select">
+                            <select name="gender" id="gender">
+                                <option value="">Select</option>
+                                <option value="Masculin">Masculin</option>
+                                <option value="Feminin">Feminin</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="inputfield">
+                        <label>Data nașterii</label>
+                        <input type="date" id="age" name="age" class="input">
+                    </div>
+                    <div class="inputfield">
+                        <label>Greutate</label>
+                        <input type="text" class="input" id="weight" name="weight" >
+                    </div>
+                    <div class="inputfield">
+                        <label>Număr telefon</label>
+                        <input type="text" class="input" id="phone" name="phone" >
+                    </div>
+                    <div class="inputfield">
+                        <label>Adresa</label>
+                        <textarea class="textareaAddress" id="address" name="address" ></textarea>
+                    </div> 
+                    <div class="inputfield">
+                        <label>Detalii</label>
+                        <textarea class="textareaDetails" id="details" name="details" ></textarea>
+                    </div> 
+                    <div class="inputfield">
+                        <input type="submit" name="trimite" value="Trimite" class="btn">
+                    </div>
+                </div>
+            </form>
+        </div>	
+    </div>
+</section>
+
+{% endblock %}

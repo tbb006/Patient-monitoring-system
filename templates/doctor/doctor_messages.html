@@ -1,0 +1,34 @@
+{% extends "doctor/doctor.html" %}
+{% block content %}
+
+<section class="home-section">
+    <div class="content-message" align="center">
+        <div class="sendMessage"> 
+            <div class="title">
+                Trimite un mesaj
+              </div>
+            <form action="/doctor/messages/send_message" method="post">
+                <div class="form">
+                    <div class="inputfield">
+                        <input type="email" id="patient" name="patient" placeholder="Email-ul pacientului" class="input"/>
+                    </div>
+
+                    <div class="inputfield">
+                        <textarea id="message" name="message" cols="30" rows="10" placeholder="Mesaj" class="textareaMessage"></textarea>
+                    </div>
+
+                    <div class="inputfield">
+                        <button type="submit" name="trimite" value="Trimite" class="btn">Trimite mesajul</button>
+                    </div>    
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/messagesOption.js') }}"> </script> 
+</section>
+
+{% endblock %}
+
+
+

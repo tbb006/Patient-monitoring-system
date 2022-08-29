@@ -1,0 +1,27 @@
+{% extends "doctor/doctor.html" %}
+{% block content %}
+<section class="home-section">
+    <div class="content-list" align="center">
+        <h3>Lista persoanelor monitorizate</h3>
+        <br><br>
+        <table class="table1-sortable">
+            <thead>
+                <th>Nr</th>
+                <th>Nume</th>
+                <th>Puls</th>
+                <th>SPO2</th>
+                <th>Temperatura</th>
+                <th>Data</th>
+            </thead>
+            <tbody id="tbody1">
+            </tbody>
+        </table>
+ 
+<script type="module" src="{{ url_for('static', filename='js/healthParameters.js') }}"> </script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+</div>
+</div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. {{nume}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/doctorPage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">Doctor</div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+        <div class="doctor-profile"> 
+        <img src="{{ url_for('static', filename='imagini/doctor-profile.svg') }}" >
+        <br>
+        <span class="text">{{nume}}</span>
+        </div>
+        
+        <ul class="nav-list">
+          <li>
+           <a href="/doctor">
+             <i class='bx bx-user' ></i>
+             <span class="links_name">Acasă</span>
+           </a>
+           <span class="tooltip">Acasă</span>
+         </li>
+          <li>
+           <a href="/doctor/graphs">
+             <i class='bx bx-line-chart' ></i>
+             <span class="links_name">Grafice</span>
+           </a>
+           <span class="tooltip">Grafice</span>
+         </li>
+         <li>
+           <a href="/doctor/messages">
+             <i class='bx bx-edit' ></i>
+             <span class="links_name">Trimite un mesaj</span>
+           </a>
+           <span class="tooltip">Trimite</span>
+         </li>
+         <li>
+          <a href="/doctor/view_messages">
+            <i class='bx bx-chat' ></i>
+            <span class="links_name">Mesaje primite</span>
+          </a>
+          <span class="tooltip">Mesaje</span>
+        </li>
+         <li>
+           <a href="/doctor/patient">
+             <i class='bx bx-folder' ></i>
+             <span class="links_name">Date pacienți</span>
+           </a>
+           <span class="tooltip">Date</span>
+         </li>
+         <li>
+           <a href="/doctor/create_user">
+             <i class='bx bx-add-to-queue' ></i>
+             <span class="links_name">Adaugă pacienți </span>
+           </a>
+           <span class="tooltip">Adaugă</span>
+         </li>
+         <li>
+          <a href="/doctor/view_users">
+            <i class='bx bx-list-ul' ></i>
+            <span class="links_name">Listă pacienți </span>
+          </a>
+          <span class="tooltip">Pacienți</span>
+        </li>
+         <a href="/" class="footer">
+         <li class="profile">
+             <div class="profile-details">
+                 <div class="name">Deconectare</div>
+             </div>
+             <i class='bx bx-log-out' id="log_out" ></i>
+            </a>
+         </li>
+        </ul>
+      </div> 
+
+
+{% block content %}
+<section class="home-section">
+  <div class="content">
+    <div class="content-1">
+      <img src="{{ url_for('static', filename='imagini/doctor-welcome.svg') }}" class="img">
+      <br><br>
+      <h3>Bine ai venit, <span>{{nume}}</span></h3>
+      <br>
+      <h3>Aceasta este o pagină destinată doctorilor pentru a monitoriza pacienții. </h3>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+</body>
+
+<script src="{{ url_for('static', filename='js/navbar.js') }}"> </script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+</html>

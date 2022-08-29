@@ -1,0 +1,49 @@
+{% extends "patient_page/patient.html" %}
+{% block content %}
+<section class="home-section">
+    <div class="content-message" align="center">
+        <div class="sendMessage"> 
+            <div class="title">
+                Trimite un mesaj către medici
+              </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                        {% for category, message in messages %}
+                            <script type="text/javascript">
+                                swal({
+                                    title: "{{message}}",
+                                    icon: "{{category}}",
+                                });
+                            </script>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <form action="/patient/send_message_ok" method="post">
+                <div class="form">
+                    <div class="inputfield">
+                        <input type="email" id="doctor" name="doctor" placeholder="Email-ul doctorului" class="input"/>
+                    </div>
+                    <div class="inputfield">
+                        <div class="custom_select">
+                            <select name="subject" id="subject">
+                                <option value="">Subiect</option>
+                                <option value="Programare">Programare</option>
+                                <option value="Semnalare problemă">Semnalare problemă</option>
+                                <option value="Intrebare">Întrebare</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="inputfield">
+                        <textarea id="message" name="message" cols="30" rows="10" placeholder="Mesaj" class="textareaMessage"></textarea>
+                    </div>
+                    <div class="inputfield">
+                        <button type="submit" name="trimite" value="Trimite" class="btn">Trimite mesajul</button>
+                    </div>    
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
